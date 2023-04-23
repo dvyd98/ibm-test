@@ -10,12 +10,8 @@ repositories {
 }
 
 dependencies {
-// https://mvnrepository.com/artifact/org.jooq/jooq
-    implementation group: 'org.jooq', name: 'jooq', version: '3.14.8'
-
-// https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
     implementation group: 'com.mysql', name: 'mysql-connector-j', version: '8.0.33'
-
+    implementation 'io.github.cdimascio:dotenv-java:2.3.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }

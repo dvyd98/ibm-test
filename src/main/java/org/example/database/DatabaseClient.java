@@ -1,5 +1,7 @@
 package org.example.database;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.sql.*;
 
 public class DatabaseClient {
@@ -12,14 +14,26 @@ public class DatabaseClient {
 
     private Connection connection;
 
-    public DatabaseClient(String username, String password, String connectionUrl) {
-        this.username = username;
-        this.password = password;
-        this.connectionUrl = connectionUrl;
+    public DatabaseClient() {
+        Dotenv dotenv = Dotenv.load();
+        this.username = dotenv.get("MYSQL_USER", "root");
+        this.password = dotenv.get("MYSQL_PASSWORD", "root");
+        this.connectionUrl = "jdbc:mysql://localhost:3306/ibm";
     }
 
-    public void connect() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+    public DatabaseClient(String databaseName) {
+        Dotenv dotenv = Dotenv.load();
+        this.username = dotenv.get("MYSQL_USER", "root");
+        this.password = dotenv.get("MYSQL_PASSWORD", "root");
+        this.connectionUrl = "jdbc:mysql://localhost:3306/" + databaseName;
+    }
+    public DatabaseClient(String username, String password, String databaseName) {
+        this.username = username;
+        this.password = password;
+        this.connectionUrl = "jdbc:mysql://localhost:3306/" + databaseName;
+    }
+
+    public void connect() throws SQLException {
         this.connection = DriverManager.getConnection(connectionUrl, username, password);
     }
 

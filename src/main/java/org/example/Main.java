@@ -3,17 +3,12 @@ package org.example;
 import org.example.database.DatabaseClient;
 import org.example.database.entity.Provider;
 import org.example.database.query.ProviderQuery;
-import org.jooq.impl.DSL;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.io.*;
 
@@ -24,7 +19,7 @@ public class Main {
             return;
         }
         String clientId = args[0];
-        DatabaseClient mysqlClient = new DatabaseClient("root", "root", "jdbc:mysql://localhost:3306/test");
+        DatabaseClient mysqlClient = new DatabaseClient();
 
         try {
             mysqlClient.connect();
@@ -49,11 +44,23 @@ public class Main {
                 rs.getDate("registration_date"),
                 rs.getLong("client_id")));
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("There was a problem reading the result set. Error: " + e.getMessage());
             return;
         }
 
+        try {
+            rs.close();
+            mysqlClient.disconnect();
+        } catch (SQLException e) {
+            System.out.println("There was a problem closing the connection. Error: " + e.getMessage());
+            return;
+        }
+
+        if (providers.isEmpty()) {
+            System.out.println("No providers found for client with id " + clientId);
+            return;
+        }
         Charset utf8 = StandardCharsets.UTF_8;
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream("proveedores.txt"), utf8))) {
