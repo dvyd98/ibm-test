@@ -2,7 +2,6 @@ package org.example;
 
 import org.example.database.DatabaseClient;
 import org.example.database.query.ProviderQuery;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
