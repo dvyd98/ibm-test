@@ -6,7 +6,7 @@ Este repositorio contiene el código fuente de la aplicación de prueba de IBM.
 Primero se debe clonar el repositorio. Después basta con ejecutar el fichero `script.sql` que se encuentra en la raíz del proyecto. 
 Este fichero crea dos bases de datos; `ibm` para la ejecución del programa y `test` para los tests.
 ### Compilación ###
-Se debe copiar el archivo `.env.example`, renombrarlo a `.env` y modificar los valores de las variables para que se ajusten a las credenciales de acceso de la base de datos.
+En la carpeta `src/main/resources` se debe copiar el archivo `.env.example`, renombrarlo a `.env` y modificar los valores de las variables para que se ajusten a las credenciales de acceso de la base de datos.
 Finalmente, se ejecutan los tests y se hace la build con el siguiente comando:
 
 ```bash

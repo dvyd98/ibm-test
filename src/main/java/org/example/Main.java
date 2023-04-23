@@ -15,7 +15,7 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) {
         if (args.length == 0) {
-            System.out.println("Error: Invalid number of arguments. Usage: main <client-id>");
+            System.out.println("Error: Invalid number of arguments. Usage: ibm-prueba <client-id>");
             return;
         }
         String clientId = args[0];
