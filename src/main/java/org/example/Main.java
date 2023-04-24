@@ -64,7 +64,8 @@ public class Main {
         Charset utf8 = StandardCharsets.UTF_8;
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream("proveedores.txt"), utf8))) {
-            writer.write("Proveedores:\n");
+            writer.write("Tabla: proveedores\n" +
+                             "Campos: id_proveedor, nombre, fecha de alta, id_cliente\n");
             providers.parallelStream().forEach(
                 provider -> {
                     try {
